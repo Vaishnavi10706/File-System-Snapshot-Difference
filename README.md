@@ -1,79 +1,106 @@
-# File-System-Snapshot-Difference
-This is our OJT Project in Product Development
-File System Snapshot Diff:
+File System Snapshot Diff
 
+A Python-based tool that captures snapshots of a folder and compares them to show which files were added, modified, or removed.
+The project also includes a Streamlit Web UI to make it easy to use from the browser for the user.
 
-TASK 1:
-Take a snapshot of a folder and save file details (name, size, modified time);
+Features
 
-take_snapshot()   scans a given folder recursively and records information about each file so that the folder’s state can be saved and compared later.
+1. File Snapshot Generation
 
-Inputs
-•	folder_path (str): The folder you want to snapshot.
-•	use_hash (bool, optional): If True, it calculates an MD5 hash for each file to detect content changes accurately.
-What it Does
-Walks through the folder using os.walk(), including all subfolders.
-For each file, collects:
-o	Size (st_size) – to detect changes in file length.
-o	Modification time (st_mtime) – to detect when the file was last changed.
-o	Optional hash (hash) – a fingerprint of the file content to detect content changes even if size or time doesn’t change.
+a. Takes a complete snapshot of a folder at a particular time.
 
-Stores each file in a dictionary with its relative path as the key and file info as the value.
+b. Stores file details (path + hash) in a JSON file.
 
-Skips files that can’t be accessed due to permissions or if they no longer exist.
+c. Helps track changes between different snapshot versions.
 
-Why It’s Feature One
-This function collects all the data needed to represent the current state of a folder, which is the first step in your tracker. The snapshot is later saved to JSON with save_snapshot() for later comparison.
+2. Snapshot Comparison (Diff Tool)
 
+Compares Snapshot A with Snapshot B and shows:
 
-Feature Two: Compare Snapshots (Simple Explanation)
-Feature Two is used to find changes in a folder by comparing two snapshots – an old one and a new one.
-How it works:
-1.	It checks which files are new (added), which are missing (deleted), and which are changed (modified).
-2.	For modified files, it compares size, last modified time, or file content (if hash is used).
-3.	After comparison, it shows the results in a report with:
-o	+ for added
-o	- for deleted
-o	* for modified
+🟢 Added Files: New files present in Snapshot B but not in A
 
-Optional: You can also save the report to a CSV file.
-Why it’s important:
-•	This is the core part of folder tracking.
-•	It tells exactly what changed in the folder since the last snapshot.
-•	It uses the snapshot from Feature One to compare.
+🟡 Modified Files: Files whose content has changed (identified using MD5 hash)
 
+🔴 Removed Files: Files present in Snapshot A but missing in Snapshot B
 
+3. Streamlit Web UI
 
+A user-friendly interface built using Streamlit that allows users to:
 
-Feature Three: Export Results to CSV
-Purpose:
-This feature allows the user to save the folder changes report into a CSV file, which makes it easy to:
-•	Share the report with others
-•	Print the report
-•	Analyze the changes in spreadsheet tools like Excel or Google Sheets
+Enter folder for snapshot
 
+Generate snapshot files
 
-How it works (Code Implementation)
-1.	Function: export_csv(added, deleted, modified, output_file)
-o	Inputs:
-	added → list of files that were added
-	deleted → list of files that were deleted
-	modified → list of files that were modified
-	output_file → the path/name of the CSV file to save
-2.	Process:
-o	Open the CSV file for writing.
-o	Write a header row: "Change Type", "File Path"
-o	Loop through each list and write each file with its change type:
-	Added → newly added files
-	Deleted → removed files
-	Modified → changed files
-3.	Output:
-o	A CSV file with two columns:
-1.	Change Type → Added / Deleted / Modified
-2.	File Path → relative path of the file
-Why it’s useful
-•	Shareable: You can send the CSV to colleagues or other users.
-•	History tracking: Keeps a record of folder changes over time.
-•	Analysis: Open in Excel, Google Sheets, or other tools to sort, filter, or analyze changes.
-//
+Enter snapshot files name and compare snapshots
 
+View results clearly: added, modified, and removed files
+
+📂 Folder Structure
+
+file-system-snapshot-diff/
+│
+├── snapshots/ # Auto-generated snapshot files
+│
+├── src/
+| |-- init.py
+│ ├── snapshot.py # Logic for taking snapshots
+│ ├── diff.py # Logic for comparing snapshots
+│ ├── file-compare.py # Hashing and helper functions
+| |-- main.py
+├── app.py # Streamlit Web UI
+│--LICENSE #MIT license
+└── README.md
+
+Tech Stack
+
+1. Python 3
+
+2. Streamlit (for web UI)
+
+3. JSON (to store snapshot data)
+
+4. Hashlib MD5 (to detect changes in file content)
+
+How It Works in Streamlit
+
+How to open streamlit UI
+streamlit run app.py
+
+Step 1: Take a Snapshot
+a. Enter folder name whose snapshot should be taken
+b. Enter snapshot name
+c. Click on take snapshot button
+
+Step 2: Compare Two Snapshots
+a. Enter the snap1 file
+b. Enter the snap2 file
+c. Click on compare snapshot button
+
+Output Example
+
+Added Files:
+
+- test2.txt
+
+Modified Files:
+
+- README.md
+- text1.txt
+
+Removed Files:
+
+- test3.txt
+
+Purpose of the Project
+
+This OJT project helps students understand:
+
+How file systems work
+
+How hashing helps detect content changes
+
+How to build a real-world tool
+
+How to integrate backend + UI
+
+How to design clean folder structures and workflows
