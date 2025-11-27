@@ -6,6 +6,7 @@ import sys
 sys.path.append(os.path.join(os.getcwd(),"src"))
 
 from snapshot import take_snapshot
+from diff import diff_snapshots
 
 SNAPSHOT_FOLDER = "snapshots"
 os.makedirs(SNAPSHOT_FOLDER,exist_ok=True)
@@ -33,3 +34,24 @@ if menu == "Take Snapshot":
         st.success(f"✅ Snapshot saved to **{output}**")
       except Exception as e:
         st.error(f"Error: {e}")
+elif menu == "Compare Snapshots":
+  st.header("Compare two Snapshots")
+  snap1 = st.text_input("Snapshot 1 name (without .json): ")
+  snap2 = st.text_input("Snapshot 2 name (without .json): ")
+  if st.button("Compare Snapshots"):
+    try:
+      path1 = f"{SNAPSHOT_FOLDER}/{snap1}.json"
+      path2 = f"{SNAPSHOT_FOLDER}/{snap2}.json"
+      s1 = load_snapshot(path1)
+      s2 = load_snapshot(path2)
+      added, removed, modified = diff_snapshots(s1, s2)
+      st.subheader("Added Files")
+      st.write(added or "None")
+      st.subheader("Remove Files")
+      st.write(removed or "None")
+      st.subheader("Modified Files")
+      st.write(modified or "None")     
+    except FileNotFoundError:
+      st.error("One or both snapshot do not exist.")
+    except Exception as e:
+      st.error(f"Error: {e}")
