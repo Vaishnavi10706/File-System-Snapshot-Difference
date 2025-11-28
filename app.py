@@ -55,3 +55,13 @@ elif menu == "Compare Snapshots":
       st.error("One or both snapshot do not exist.")
     except Exception as e:
       st.error(f"Error: {e}")
+elif menu == "Compare Files":
+  st.header("Compare Two Individual Files")
+  old_file = st.text_input("Old file path: ")
+  new_file = st.text_input("New file path: ") 
+  if st.button("Compare Files"):
+    try: 
+      status = file_status(old_file,new_file)
+      st.info(f"Result: **{status}**") 
+    except Exception as e:
+      st.error(f"Error: {e}")
