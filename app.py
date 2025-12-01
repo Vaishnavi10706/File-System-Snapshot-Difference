@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.getcwd(),"src"))
 
 from snapshot import take_snapshot
 from diff import diff_snapshots
+from file_compare import file_status
 
 SNAPSHOT_FOLDER = "snapshots"
 os.makedirs(SNAPSHOT_FOLDER,exist_ok=True)
