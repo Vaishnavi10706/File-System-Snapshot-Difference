@@ -37,19 +37,24 @@ View results clearly: added, modified, and removed files
 
 📂 Folder Structure
 
-file-system-snapshot-diff/
+FILE-SYSTEM-SNAPSHOT-DIFF/
 │
-├── snapshots/ # Auto-generated snapshot files
+├── folder/ # Sample folder for testing (contains text.txt)
+│
+├── snapshots/ # Auto-generated snapshot files (JSON)
 │
 ├── src/
-| |-- init.py
-│ ├── snapshot.py # Logic for taking snapshots
-│ ├── diff.py # Logic for comparing snapshots
-│ ├── file-compare.py # Hashing and helper functions
-| |-- main.py
-├── app.py # Streamlit Web UI
-│--LICENSE #MIT license
-└── README.md
+│ ├── **pycache**/ # Python cache files
+│ ├── diff.py # Compares two snapshots and finds added/modified/removed files
+│ ├── file_compare.py # Line-by-line comparison for modified files
+│ ├── main.py # Main logic (Streamlit UI + snapshot calling)
+│ ├── snapshot.py # Takes snapshot of the folder (creates JSON)
+│
+├── app.py # Streamlit Web UI entry file
+│
+├── LICENSE # License for the project
+├── README.md # Project documentation
+├── requirements.txt # Python dependencies (Streamlit etc.)
 
 Tech Stack
 
