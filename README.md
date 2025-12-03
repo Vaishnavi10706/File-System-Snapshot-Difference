@@ -1,41 +1,42 @@
 File System Snapshot Diff
 
 A Python-based tool that captures snapshots of a folder and compares them to show which files were added, modified, or removed.
-The project also includes a Streamlit Web UI to make it easy to use from the browser for the user.
+
+The project also includes a Streamlit Web UI to make it easy for users to interact with the system from the browser.
 
 Features
 
 1. File Snapshot Generation
 
-a. Takes a complete snapshot of a folder at a particular time.
+Takes a complete snapshot of a folder at a particular time.
 
-b. Stores file details (path + hash) in a JSON file.
+Stores file details (path + MD5 hash) in a JSON file.
 
-c. Helps track changes between different snapshot versions.
+Helps track changes between multiple snapshot versions.
 
 2. Snapshot Comparison (Diff Tool)
 
-Compares Snapshot A with Snapshot B and shows:
+The tool compares Snapshot A with Snapshot B and displays:
 
-🟢 Added Files: New files present in Snapshot B but not in A
+🟢 Added Files: New files present in Snapshot B but not in Snapshot A
 
-🟡 Modified Files: Files whose content has changed (identified using MD5 hash)
+🟡 Modified Files: Files whose content has changed (detected using MD5 hash)
 
 🔴 Removed Files: Files present in Snapshot A but missing in Snapshot B
 
 3. Streamlit Web UI
 
-A user-friendly interface built using Streamlit that allows users to:
+A user-friendly UI built with Streamlit that allows users to:
 
-Enter folder for snapshot
+Enter folder name for snapshot
 
 Generate snapshot files
 
-Enter snapshot files name and compare snapshots
+Enter snapshot file names and compare snapshots
 
-View results clearly: added, modified, and removed files
+Clearly view results: added, modified, and removed files
 
-📂 Folder Structure
+Folder Structure
 
 ```
 FILE-SYSTEM-SNAPSHOT-DIFF/
@@ -48,54 +49,61 @@ FILE-SYSTEM-SNAPSHOT-DIFF/
 │ ├── **pycache**/ # Python cache files
 │ ├── diff.py # Compares two snapshots and finds added/modified/removed files
 │ ├── file_compare.py # Line-by-line comparison for modified files
-│ ├── main.py # Main logic (Streamlit UI + snapshot calling)
+│ ├── main.py # Main logic (Streamlit backend functions)
 │ ├── snapshot.py # Takes snapshot of the folder (creates JSON)
-│ └── app.py # Streamlit Web UI entry file
+│
+├── app.py # Streamlit Web UI entry file
 │
 ├── LICENSE # License for the project
 ├── README.md # Project documentation
-└── requirements.txt # Python dependencies (Streamlit etc.)
+└── requirements.txt # Python dependencies (Streamlit, etc.)
 ```
 
 Tech Stack
 
-1. Python 3
+Python 3
 
-2. Streamlit (for web UI)
+Streamlit (for Web UI)
 
-3. JSON (to store snapshot data)
+JSON (to store snapshot data)
 
-4. Hashlib MD5 (to detect changes in file content)
+Hashlib MD5 (to detect file content changes)
 
 How It Works in Streamlit
-
-How to open streamlit UI
+How to open Streamlit UI
 streamlit run app.py
 
 Step 1: Take a Snapshot
-a. Enter folder name whose snapshot should be taken
-b. Enter snapshot name
-c. Click on take snapshot button
+
+Enter the folder name whose snapshot should be taken
+
+Enter the snapshot name
+
+Click on Take Snapshot
 
 Step 2: Compare Two Snapshots
-a. Enter the snap1 file
-b. Enter the snap2 file
-c. Click on compare snapshot button
+
+Enter the first snapshot file
+
+Enter the second snapshot file
+
+Click on Compare Snapshots
 
 Output Example
 
-Added Files:
+Added Files
 
-- test2.txt
+test2.txt
 
-Modified Files:
+Modified Files
 
-- README.md
-- text1.txt
+README.md
 
-Removed Files:
+text1.txt
 
-- test3.txt
+Removed Files
+
+test3.txt
 
 Purpose of the Project
 
