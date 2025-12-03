@@ -49,12 +49,11 @@ FILE-SYSTEM-SNAPSHOT-DIFF/
 │ ├── file_compare.py # Line-by-line comparison for modified files
 │ ├── main.py # Main logic (Streamlit UI + snapshot calling)
 │ ├── snapshot.py # Takes snapshot of the folder (creates JSON)
-│
-├── app.py # Streamlit Web UI entry file
+│ └── app.py # Streamlit Web UI entry file
 │
 ├── LICENSE # License for the project
 ├── README.md # Project documentation
-├── requirements.txt # Python dependencies (Streamlit etc.)
+└── requirements.txt # Python dependencies (Streamlit etc.)
 
 Tech Stack
 
