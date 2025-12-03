@@ -37,6 +37,7 @@ View results clearly: added, modified, and removed files
 
 📂 Folder Structure
 
+```
 FILE-SYSTEM-SNAPSHOT-DIFF/
 │
 ├── folder/ # Sample folder for testing (contains text.txt)
@@ -54,6 +55,7 @@ FILE-SYSTEM-SNAPSHOT-DIFF/
 ├── LICENSE # License for the project
 ├── README.md # Project documentation
 └── requirements.txt # Python dependencies (Streamlit etc.)
+```
 
 Tech Stack
 
@@ -108,3 +110,7 @@ How to build a real-world tool
 How to integrate backend + UI
 
 How to design clean folder structures and workflows
+
+```
+
+```
