@@ -34,8 +34,6 @@ When the user enters a folder name and presses Enter, the app automatically disp
 
 - Total Folders
 
-- Total Size (in MB & GB)
-
 - Last Modified Time
 
 This instant preview helps users understand the folder structure before taking a snapshot.
@@ -143,8 +141,6 @@ Folder Statistics
 Total Files: 1
 
 Total Folders: 0
-
-Total Size: 0.00 MB
 
 Last Modified: 2025-12-02 11:27:33
 
