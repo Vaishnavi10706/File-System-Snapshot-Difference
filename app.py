@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import json
 import sys
+import datetime
 
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
@@ -15,6 +16,29 @@ os.makedirs(SNAPSHOT_FOLDER, exist_ok=True)
 def load_snapshot(path):
     with open(path) as f:
         return json.load(f)
+    
+def get_folder_statistics(folder_path):
+    total_files = 0
+    total_folders = 0
+    total_size = 0
+    last_modified = 0
+
+    for root, dirs, files in os.walk(folder_path):
+        total_folders += len(dirs)
+        total_files += len(files)
+
+        for f in files:
+            file_path = os.path.join(root, f)
+            try:
+                total_size += os.path.getsize(file_path)
+                last_modified = max(last_modified, os.path.getmtime(file_path))
+            except:
+                pass
+
+    size_mb = total_size / (1024 * 1024)
+    size_gb = total_size / (1024 * 1024 * 1024)
+
+    return total_files, total_folders, size_mb, size_gb, last_modified
 
 def set_dark_mode():
     st.markdown("""
@@ -84,6 +108,23 @@ if menu == "Take Snapshot":
     st.header("Take snapshot of a folder")
 
     folder = st.text_input("Enter folder path to snapshot:")
+
+    if folder and os.path.exists(folder):
+        try:
+            files, folders, size_mb, size_gb, last_modified = get_folder_statistics(folder)
+
+            st.subheader("📁 Folder Statistics")
+            st.info(f"""
+**Total Files:** {files}  
+**Total Folders:** {folders}  
+**Total Size:** {size_mb:.2f} MB ({size_gb:.2f} GB)  
+**Last Modified:** {datetime.datetime.fromtimestamp(last_modified)}
+            """)
+        except Exception as e:
+            st.error(f"Error reading folder: {e}")
+    elif folder:
+        st.error("Folder does not exist.")
+        
     snap_name = st.text_input("Snapshot name (without extension):")
 
     if st.button("Take snapshot"):
