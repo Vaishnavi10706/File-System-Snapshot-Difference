@@ -50,6 +50,12 @@ Choose snapshot files -> Compare snapshots
 
 View added, removed, modified files
 
+5. Snapshot History table
+
+A clean Table which shows all the snapshot in a table format whuch includes Snapshot Name, Date/Time and No of file inside that folder.
+
+It help to get a list of snapshot in one place so that the user can see which snapshot are there and which snapshot are deleted.
+
 Folder Structure:
 
 ```
