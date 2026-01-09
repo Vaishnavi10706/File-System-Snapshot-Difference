@@ -38,6 +38,14 @@ def get_snapshot_history():
                 "Total Files": total_files
             })
     return history
+
+def delete_snapshot(snapshot_name):
+    path = os.path.join(SNAPSHOT_FOLDER,f"{snapshot_name}.json")
+    if os.path.exists(path):
+        os.remove(path)
+        return True
+    else:
+        return False
     
 def get_folder_statistics(folder_path):
     total_files = 0
@@ -158,16 +166,31 @@ if menu == "Take Snapshot":
 elif menu == "Snapshot History":
     st.header("Snapshot History")
     history = get_snapshot_history()
-    if history:
-        import pandas as pd
-        df = pd.DataFrame(history)
-        st.dataframe(
-            df,
-            use_container_width=True,
-            hide_index=True
-        )
+    if not history:
+        st.info("No Snapshot found.")
     else:
-        st.info("No snapshot found.")
+        col1,col2,col3,col4 = st.columns([3,3,2,1])
+        col1.markdown("**Snapshot Name**")
+        col2.markdown("**Date/Time**")
+        col3.markdown("**Total Files**")
+        col4.markdown("**Delete**")
+
+        st.divider()
+
+        for snap in history:
+            c1,c2,c3,c4 = st.columns([3,3,2,1])
+
+            c1.write(snap["Snapshot Name"])
+            c2.write(snap["Date/Time"])
+            c3.write(snap["Total Files"])
+
+            if c4.button("🗙",key=f"del_{snap["Snapshot Name"]}"):
+                if delete_snapshot(snap["Snapshot Name"]):
+                    st.success(f"Deletef snapshot: {snap["Snapshot Name"]}")
+                    st.rerun()
+                else:
+                    st.error("Failed to delete snapshot.")
+
 elif menu == "Compare Snapshots":
     st.header("Compare two Snapshots")
 
