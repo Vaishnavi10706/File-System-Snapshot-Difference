@@ -132,13 +132,13 @@ menu = st.sidebar.radio("Select an action", ["Take Snapshot","Snapshot History",
 if menu == "Take Snapshot":
     st.header("Take snapshot of a folder")
 
-    folder = st.text_input("Enter folder path to snapshot:")
+    folder = st.text_input("**Enter folder path to snapshot:**")
 
     if folder and os.path.exists(folder):
         try:
             files, folders, last_modified = get_folder_statistics(folder)
 
-            st.subheader("📁 Folder Statistics")
+            st.subheader("**📁 Folder Statistics**")
             st.info(f"""
 **Total Files:** {files}  
 **Total Folders:** {folders}    
@@ -149,7 +149,7 @@ if menu == "Take Snapshot":
     elif folder:
         st.error("Folder does not exist.")
         
-    snap_name = st.text_input("Snapshot name (without extension):")
+    snap_name = st.text_input("**Snapshot name (without extension):**")
 
     if st.button("Take snapshot"):
         if not folder or not snap_name:
@@ -164,10 +164,10 @@ if menu == "Take Snapshot":
                 st.error(f"Error: {e}")
 
 elif menu == "Snapshot History":
-    st.header("Snapshot History")
+    st.header("**Snapshot History**")
     history = get_snapshot_history()
     if not history:
-        st.info("No Snapshot found.")
+        st.info("**No Snapshot found.**")
     else:
         col1,col2,col3,col4 = st.columns([3,3,2,1])
         col1.markdown("**Snapshot Name**")
@@ -192,7 +192,7 @@ elif menu == "Snapshot History":
                     st.error("Failed to delete snapshot.")
 
 elif menu == "Compare Snapshots":
-    st.header("Compare two Snapshots")
+    st.header("**Compare two Snapshots**")
 
     snap1 = st.text_input("Snapshot 1 name (without .json): ")
     snap2 = st.text_input("Snapshot 2 name (without .json): ")
@@ -222,7 +222,7 @@ elif menu == "Compare Snapshots":
             st.error(f"Error: {e}")
 
 elif menu == "Compare Files":
-    st.header("Compare Two Individual Files")
+    st.header("**Compare Two Individual Files**")
 
     old_file = st.text_input("Old file path:")
     new_file = st.text_input("New file path:")
