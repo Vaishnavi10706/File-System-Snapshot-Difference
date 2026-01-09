@@ -16,6 +16,28 @@ os.makedirs(SNAPSHOT_FOLDER, exist_ok=True)
 def load_snapshot(path):
     with open(path) as f:
         return json.load(f)
+
+def get_snapshot_history():
+    history = []
+
+    for file in os.listdir(SNAPSHOT_FOLDER):
+        if file.endswith(".json"):
+            path = os.path.join(SNAPSHOT_FOLDER,file)
+            created_time = os.path.getctime(path)
+            created_time = datetime.datetime.fromtimestamp(created_time)
+
+            with open(path,"r") as f:
+                data = json.load(f)
+            if isinstance(data,dict) and "files" in data:
+                total_files = len(data["files"])
+            else:
+                total_files = len(data)
+            history.append({
+                "Snapshot Name": file.replace(".json",""),
+                "Date/Time": created_time.strftime("%Y-%m-%d %H-%M:%S"),
+                "Total Files": total_files
+            })
+    return history
     
 def get_folder_statistics(folder_path):
     total_files = 0
@@ -97,7 +119,7 @@ else:
 
 st.write("A simple web app UI for taking Snapshots , comparing two Snapshots and comparing two file changes.")
 
-menu = st.sidebar.radio("Select an action", ["Take Snapshot", "Compare Snapshots", "Compare Files"])
+menu = st.sidebar.radio("Select an action", ["Take Snapshot","Snapshot History", "Compare Snapshots", "Compare Files"])
 
 if menu == "Take Snapshot":
     st.header("Take snapshot of a folder")
@@ -133,6 +155,19 @@ if menu == "Take Snapshot":
             except Exception as e:
                 st.error(f"Error: {e}")
 
+elif menu == "Snapshot History":
+    st.header("Snapshot History")
+    history = get_snapshot_history()
+    if history:
+        import pandas as pd
+        df = pd.DataFrame(history)
+        st.dataframe(
+            df,
+            use_container_width=True,
+            hide_index=True
+        )
+    else:
+        st.info("No snapshot found.")
 elif menu == "Compare Snapshots":
     st.header("Compare two Snapshots")
 
