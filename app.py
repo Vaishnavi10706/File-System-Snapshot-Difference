@@ -169,27 +169,36 @@ elif menu == "Snapshot History":
     if not history:
         st.info("**No Snapshot found.**")
     else:
-        col1,col2,col3,col4 = st.columns([3,3,2,1])
-        col1.markdown("**Snapshot Name**")
-        col2.markdown("**Date/Time**")
-        col3.markdown("**Total Files**")
-        col4.markdown("**Delete**")
+        h1,h2,h3,h4,h5 = st.columns([3,3,2,2,1])
+        h1.markdown("**Snapshot Name**")
+        h2.markdown("**Date/Time**")
+        h3.markdown("**Total Files**")
+        h4.markdown("**Confirm Delete**")
+        h5.markdown("**Delete**")
 
         st.divider()
 
         for snap in history:
-            c1,c2,c3,c4 = st.columns([3,3,2,1])
+            c1,c2,c3,c4,c5 = st.columns([3,3,2,2,1])
 
             c1.write(snap["Snapshot Name"])
             c2.write(snap["Date/Time"])
             c3.write(snap["Total Files"])
 
-            if c4.button("🗙",key=f"del_{snap["Snapshot Name"]}"):
-                if delete_snapshot(snap["Snapshot Name"]):
-                    st.success(f"Deletef snapshot: {snap["Snapshot Name"]}")
-                    st.rerun()
+            confirm = c4.checkbox(
+                "Are you sure?",
+                key=f"confirm_{snap["Snapshot Name"]}"
+            )
+
+            if c5.button("🗙",key=f"del_{snap["Snapshot Name"]}"):
+                if not confirm:
+                    st.warning("**Please confirm deletion by checking the box.**")
                 else:
-                    st.error("Failed to delete snapshot.")
+                    if delete_snapshot(snap["Snapshot Name"]):
+                        st.success(f"Deletef snapshot: {snap["Snapshot Name"]}")
+                        st.rerun()
+                    else:
+                        st.error("Failed to delete snapshot.")
 
 elif menu == "Compare Snapshots":
     st.header("**Compare two Snapshots**")
