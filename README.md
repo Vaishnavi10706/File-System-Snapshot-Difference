@@ -52,9 +52,9 @@ View added, removed, modified files
 
 5. Snapshot History table
 
-A clean Table which shows all the snapshot in a table format whuch includes Snapshot Name, Date/Time and No of file inside that folder.
+A clean Table which shows all the snapshots in a table format which includes columns like Snapshot Name , Date/Time , No of file inside folder and a delete button to delete the particular snapshot.
 
-It help to get a list of snapshot in one place so that the user can see which snapshot are there and which snapshot are deleted.
+It helps the user to get a list of snapshots in one place so that the users can see which snapshot is added and which snapshot is deleted.
 
 Folder Structure:
 
