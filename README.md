@@ -59,6 +59,14 @@ This feature helps users easily track **which snapshots exist, when they were cr
 
 ---
 
+## 📸 Screenshots
+
+### Folder Statistics & Snapshot Creation
+![Folder Statistics UI](screenshot/screenshot1.png)
+
+### Snapshot Comparison Output
+![Snapshot Diff Output](screenshot/screenshot2.png)
+
 ## 🗂️ Project Structure
 
 ```text
