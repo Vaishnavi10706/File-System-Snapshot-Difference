@@ -5,6 +5,7 @@
 # 📁 File System Snapshot Difference
 
 A **Python-based developer tool** that captures snapshots of a folder and compares them to detect **added, modified, and removed files**. The project includes a **Streamlit web UI** for easy interaction and a **Folder Statistics** feature that instantly previews folder details before creating snapshots.
+This project was developed as part of an On-the-Job Training (OJT) program to understand file system behavior, hashing, and UI integration using Streamlit.
 
 ---
 
