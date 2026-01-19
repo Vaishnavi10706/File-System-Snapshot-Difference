@@ -1,183 +1,185 @@
-File System Snapshot Difference
+# 📁 File System Snapshot Difference
 
-A Python-based tool that captures snapshots of a folder and compares them to show which files were added, modified, or removed.
+A **Python-based developer tool** that captures snapshots of a folder and compares them to detect **added, modified, and removed files**. The project includes a **Streamlit web UI** for easy interaction and a **Folder Statistics** feature that instantly previews folder details before creating snapshots.
 
-The project now includes a Folder Statistics feature, which automatically displays useful information about any folder as soon as the user enters the folder name in the Streamlit UI.
+---
 
-A Streamlit Web UI makes it easy for users to interact with the tool directly from a browser.
+## 🚀 Features
 
-Features:
+### 1. File Snapshot Generation
 
-1. File Snapshot Generation
+* Captures a complete snapshot of a selected folder
+* Stores file metadata (**file path + MD5 hash**) in a JSON file
+* Helps track file-level changes across snapshot versions
 
-Takes a complete snapshot of a selected folder
+### 2. Snapshot Comparison (Diff Tool)
 
-Stores file details (path + MD5 hash) in a JSON file
+Compares **Snapshot A** and **Snapshot B** to detect:
 
-Helps track changes between two snapshot versions
+* 🟢 **Added Files** – Present in Snapshot B but not in Snapshot A
+* 🟡 **Modified Files** – File content changed (detected via MD5 hash)
+* 🔴 **Removed Files** – Present in Snapshot A but missing in Snapshot B
 
-2. Snapshot Comparison (Diff Tool)
+### 3. Folder Statistics (Automatic Preview)
 
-Compares Snapshot A with Snapshot B and detects:
+As soon as the user enters a folder name in the Streamlit UI, the app automatically displays:
 
-🟢 Added Files — Present in Snapshot B but missing in Snapshot A
+* 📄 Total Files
+* 📁 Total Folders
+* 🕒 Last Modified Time
 
-🟡 Modified Files — Content changed (detected using MD5 hash)
+This instant preview helps users understand the folder structure **before taking a snapshot**.
 
-🔴 Removed Files — Present in Snapshot A but not in Snapshot B
+### 4. Streamlit Web UI
 
-3. Folder Statistics (New Feature)
+A clean and simple browser-based interface that allows users to:
 
-When the user enters a folder name and presses Enter, the app automatically displays:
+* Enter a folder name → Automatically view folder statistics
+* Enter a snapshot name → Generate a snapshot
+* Select two snapshots → Compare and view differences
+* Clearly view added, modified, and removed files
 
-- Total Files
+### 5. Snapshot History Table
 
-- Total Folders
+* Displays all snapshots in a structured table
+* Columns include:
 
-- Last Modified Time
+  * Snapshot Name
+  * Date & Time
+  * Number of files in the folder
+  * Confirmation checkbox (safe delete)
+  * Delete button
 
-This instant preview helps users understand the folder structure before taking a snapshot.
+This feature helps users easily track **which snapshots exist, when they were created, and safely delete them**.
 
-4. Streamlit Web UI
+---
 
-A clean and simple interface where users can:
+## 🗂️ Project Structure
 
-Type a folder name -> Automatically see folder statistics
-
-Enter a snapshot name -> Generate a new snapshot
-
-Choose snapshot files -> Compare snapshots
-
-View added, removed, modified files
-
-5. Snapshot History table
-
-A clean Table which shows all the snapshots in a table format which includes columns like Snapshot Name , Date/Time , No of file inside folder , confirmation checkbox (to confirm that if user actually wanted to delete the snapshot or not) and a delete button to delete the particular snapshot.
-
-It helps the user to get a list of snapshots in one place so that the users can see which snapshot is added and which snapshot is deleted.
-
-Folder Structure:
-
-```
+```text
 FILE-SYSTEM-SNAPSHOT-DIFFERENCE/
 │
-├── folder/ # Sample folder for testing(test.txt file)
+├── folder/                 # Sample folder for testing
 │
-├── snapshots/ # Auto-generated snapshot JSON files
+├── snapshots/              # Auto-generated snapshot JSON files
 │
 ├── src/
-│ ├── **pycache**/ # Cache files
-│ ├── diff.py # Compares two snapshots
-│ ├── file_compare.py # Line-by-line comparison
-│ ├── main.py # Streamlit backend functions
-│ ├── snapshot.py # Snapshot generator
+│   ├── __pycache__/        # Cache files
+│   ├── diff.py             # Snapshot comparison logic
+│   ├── file_compare.py     # Line-by-line file comparison
+│   ├── main.py             # Streamlit backend logic
+│   └── snapshot.py         # Snapshot generation logic
 │
-│
-├── app.py # Streamlit UI entry point (folder statistics)
-│
+├── app.py                  # Streamlit UI entry point
 ├── LICENSE
 ├── README.md
 └── requirements.txt
 ```
 
-Tech Stack Used:
+---
 
-Python 3
+## 🛠️ Tech Stack
 
-Streamlit
+* **Python 3**
+* **Streamlit**
+* **JSON**
+* **Hashlib (MD5)**
+* **OS Module**
 
-JSON
+---
 
-Hashlib MD5
+## ▶️ How to Run the Project
 
-OS
+### 1. Install Dependencies
 
-How to Use the Streamlit UI:
+```bash
+pip install -r requirements.txt
+```
 
-Run the app:
+### 2. Run the Streamlit App
 
+```bash
 streamlit run app.py
+```
 
-Step 1: View Folder Statistics (New & Automatic)
+---
 
-Enter the folder name in the input field
+## 🧭 How to Use the Streamlit UI
 
-Press Enter
+### Step 1: View Folder Statistics (Automatic)
 
-The app automatically shows:
+* Enter the folder name in the input field
+* Press **Enter**
+* The app automatically displays:
 
-Total Files
+  * Total Files
+  * Total Folders
+  * Last Modified Time
 
-Total Folders
+### Step 2: Take a Snapshot
 
-Total Size
+* Enter a snapshot name
+* Click **Take Snapshot**
+* A new snapshot JSON file is created inside the `snapshots/` folder
 
-Last Modified Time
+### Step 3: Compare Snapshots
 
-This happens before taking a snapshot.
+* Enter **Snapshot A** name
+* Enter **Snapshot B** name
+* Click **Compare Snapshots**
+* The UI displays:
 
-Step 2: Take a Snapshot
+  * Added files
+  * Modified files
+  * Removed files
 
-Enter the snapshot name
+---
 
-Click Take Snapshot
+## 📌 Example Output
 
-A new JSON snapshot file is created inside the snapshots/ folder
+### Folder Statistics
 
-Step 3: Compare Snapshots
+* **Total Files:** 1
+* **Total Folders:** 0
+* **Last Modified:** `2025-12-02 11:27:33`
 
-Enter Snapshot A
+### Snapshot Diff
 
-Enter Snapshot B
+**Added Files**
 
-Click Compare Snapshots
+* `test2.txt`
 
-The UI will show:
+**Modified Files**
 
-Added files
+* `README.md`
+* `text1.txt`
 
-Modified files
+**Removed Files**
 
-Removed files
+* `test3.txt`
 
-Example Output:
+---
 
-Folder Statistics
+## 🎯 Purpose of the Project
 
-Total Files: 1
+This OJT project is designed to help learners understand:
 
-Total Folders: 0
+* How file systems store and update data
+* How hashing helps detect content changes
+* How to build real-world developer tools
+* How to integrate backend logic with a Streamlit web UI
+* How to compute folder statistics and metadata
+* How to design clean, professional, and scalable project architecture
 
-Last Modified: 2025-12-02 11:27:33
+---
 
-Snapshot Diff
+## 🌱 Future Improvements (Optional)
 
-Added Files:
+* Snapshot versioning and tagging
+* Export diff results as reports
+* UI filters and search
+* Support for large directories and ignore rules
 
-test2.txt
+---
 
-Modified Files:
-
-README.md
-
-text1.txt
-
-Removed Files:
-
-test3.txt
-
-Purpose of the Project:
-
-This OJT project helps students learn:
-
-How file systems store and update data
-
-How hashing detects content changes
-
-How to build real-world developer tools
-
-How to integrate backend logic with Streamlit web UI
-
-How to compute folder statistics and structure metadata
-
-How to design clean and professional project architecture
+⭐ If you found this project useful, consider starring the repository!
