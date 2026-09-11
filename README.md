@@ -39,21 +39,20 @@ This instant preview helps users understand the folder structure **before taking
 
 A clean and simple browser-based interface that allows users to:
 
-* Enter a folder name → Automatically view folder statistics
-* Enter a snapshot name → Generate a snapshot
-* Select two snapshots → Compare and view differences
-* Clearly view added, modified, and removed files
+- Enter a folder name → Automatically view folder statistics
+- Enter a snapshot name → Generate a snapshot
+- Select two snapshots → Compare and view differences
+- Clearly view added, modified, and removed files
 
 ### 5. Snapshot History Table
 
 * Displays all snapshots in a structured table
 * Columns include:
-
-  * Snapshot Name
-  * Date & Time
-  * Number of files in the folder
-  * Confirmation checkbox (safe delete)
-  * Delete button
+  - Snapshot Name
+  - Date & Time
+  - Number of files in the folder
+  - Confirmation checkbox (safe delete)
+  - Delete button
 
 This feature helps users easily track **which snapshots exist, when they were created, and safely delete them**.
 
@@ -93,11 +92,11 @@ FILE-SYSTEM-SNAPSHOT-DIFFERENCE/
 
 ## 🛠️ Tech Stack
 
-* **Python 3**
-* **Streamlit**
-* **JSON**
-* **Hashlib (MD5)**
-* **OS Module**
+- **Python 3**
+- **Streamlit**
+- **JSON**
+- **Hashlib (MD5)**
+- **OS Module**
 
 ---
 
@@ -177,21 +176,21 @@ streamlit run app.py
 
 This OJT project is designed to help learners understand:
 
-* How file systems store and update data
-* How hashing helps detect content changes
-* How to build real-world developer tools
-* How to integrate backend logic with a Streamlit web UI
-* How to compute folder statistics and metadata
-* How to design clean, professional, and scalable project architecture
+- How file systems store and update data
+- How hashing helps detect content changes
+- How to build real-world developer tools
+- How to integrate backend logic with a Streamlit web UI
+- How to compute folder statistics and metadata
+- How to design clean, professional, and scalable project architecture
 
 ---
 
 ## 🌱 Future Improvements (Optional)
 
-* Snapshot versioning and tagging
-* Export diff results as reports
-* UI filters and search
-* Support for large directories and ignore rules
+- Snapshot versioning and tagging
+- Export diff results as reports
+- UI filters and search
+- Support for large directories and ignore rules
 
 ---
 
